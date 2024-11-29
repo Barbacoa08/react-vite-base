@@ -1,16 +1,16 @@
 import { axe } from "jest-axe";
 import { render, screen } from "test-utils";
-import { App } from "./";
+import { Welcome } from ".";
 
-describe("App component", () => {
+describe("Welcome component", () => {
 	it("opens without exploding", () => {
-		render(<App />);
+		render(<Welcome />);
 
 		expect(screen.getByRole("main")).toBeDefined();
 	});
 
 	it("passes basic axe compliance", async () => {
-		const { container } = render(<App />);
+		const { container } = render(<Welcome />);
 		const results = await axe(container);
 
 		expect(results).toHaveNoViolations();
