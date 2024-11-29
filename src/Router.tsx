@@ -1,4 +1,8 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+	Navigate,
+	RouterProvider,
+	createBrowserRouter,
+} from "react-router-dom";
 import { AboutPage, HomePage } from "./pages/";
 
 export interface Route {
@@ -20,7 +24,13 @@ export const routes: Route[] = [
 	},
 ];
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter([
+	...routes,
+	{
+		path: "*",
+		element: <Navigate to="/" replace />,
+	},
+]);
 
 export function Router() {
 	return <RouterProvider router={router} />;
