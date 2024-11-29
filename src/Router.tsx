@@ -3,7 +3,7 @@ import {
 	RouterProvider,
 	createBrowserRouter,
 } from "react-router-dom";
-import { AboutPage, HomePage } from "./pages/";
+import { AboutPage, HomePage, TodoPage } from "./pages/";
 
 export interface Route {
 	path: string;
@@ -21,6 +21,11 @@ export const routes: Route[] = [
 		path: "/about",
 		element: <AboutPage />,
 		name: "About",
+	},
+	{
+		path: "/todos",
+		element: <TodoPage />,
+		name: "Todos",
 	},
 ];
 

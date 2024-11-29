@@ -1,0 +1,7 @@
+.todos-container {
+
+  .queue,
+  .completed {
+    display: flex;
+  }
+}
