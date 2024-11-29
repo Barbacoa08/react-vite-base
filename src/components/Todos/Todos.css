@@ -2,7 +2,7 @@
 	.add-todo-container {
 		display: flex;
 		flex-direction: column;
-		width: 200px;
+		width: 350px;
 	}
 
 	.flex-row {
@@ -20,5 +20,12 @@
 		flex-direction: column;
 
 		min-width: 300px;
+	}
+
+	.icon-button {
+		background: none;
+		border: none;
+		font: inherit;
+		cursor: pointer;
 	}
 }

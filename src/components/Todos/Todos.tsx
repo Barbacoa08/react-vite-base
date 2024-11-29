@@ -28,15 +28,23 @@ export const Todos = () => {
 		[completed, todos],
 	);
 
+	const handleDeleteCompletedTodo = useCallback(
+		(name: string) => {
+			setCompleted(completed.filter((t) => t !== name));
+		},
+		[completed],
+	);
+
 	const handleAddTodo = useCallback(
 		// biome-ignore lint/suspicious/noExplicitAny: why are form types so annoying?
 		(e: any) => {
-			const newTodo = e.target[TodoInputName].value;
+			const newTodo = e.target[TodoInputName].value.trim();
 			e.preventDefault();
+			e.target.reset();
+
+			if (!newTodo) return;
 
 			setTodos([...todos, newTodo]);
-
-			e.target.reset();
 		},
 		[todos],
 	);
@@ -47,7 +55,12 @@ export const Todos = () => {
 
 			<form className="add-todo-container" onSubmit={handleAddTodo}>
 				<label htmlFor={TodoInputName}>Add another?</label>
-				<input id={TodoInputName} name={TodoInputName} type="text" />
+				<input
+					id={TodoInputName}
+					name={TodoInputName}
+					type="text"
+					maxLength={20}
+				/>
 				<button type="submit">Add</button>
 			</form>
 
@@ -73,14 +86,24 @@ export const Todos = () => {
 
 					<div className="completed">
 						{completed.map((t) => (
-							<label key={t}>
-								<input
-									type="checkbox"
-									checked
-									onClick={() => handleCompletionUndo(t)}
-								/>
-								{t}
-							</label>
+							<div key={t}>
+								<label>
+									<input
+										type="checkbox"
+										checked
+										onClick={() => handleCompletionUndo(t)}
+									/>
+									{t}
+								</label>
+
+								<button
+									className="icon-button"
+									type="button"
+									onClick={() => handleDeleteCompletedTodo(t)}
+								>
+									❌
+								</button>
+							</div>
 						))}
 					</div>
 				</div>
