@@ -2,7 +2,7 @@ import { axe } from "jest-axe";
 import { render, screen } from "test-utils";
 import { App } from "./";
 
-describe("Checkout component", () => {
+describe("App component", () => {
 	it("opens without exploding", () => {
 		render(<App />);
 
