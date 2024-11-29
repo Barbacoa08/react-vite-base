@@ -1,3 +1,4 @@
+import "@barbajoe/css-lib/dist/barbajoe.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
