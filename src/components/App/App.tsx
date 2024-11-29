@@ -5,7 +5,7 @@ export const App = () => {
 	const [count, setCount] = useState(0);
 
 	return (
-		<>
+		<main>
 			<h1>Vite + React</h1>
 
 			<div className="card">
@@ -21,7 +21,7 @@ export const App = () => {
 			<p className="read-the-docs">
 				Click on the Vite and React logos to learn more
 			</p>
-		</>
+		</main>
 	);
 };
 
