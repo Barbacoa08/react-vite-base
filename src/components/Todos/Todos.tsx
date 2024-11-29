@@ -73,7 +73,7 @@ export const Todos = () => {
 							<label key={t}>
 								<input
 									type="checkbox"
-									onClick={() => handleTodoCompletion(t)}
+									onChange={() => handleTodoCompletion(t)}
 								/>
 								{t}
 							</label>
@@ -91,12 +91,13 @@ export const Todos = () => {
 									<input
 										type="checkbox"
 										checked
-										onClick={() => handleCompletionUndo(t)}
+										onChange={() => handleCompletionUndo(t)}
 									/>
 									{t}
 								</label>
 
 								<button
+									aria-label={`Delete ${t}`}
 									className="icon-button"
 									type="button"
 									onClick={() => handleDeleteCompletedTodo(t)}
