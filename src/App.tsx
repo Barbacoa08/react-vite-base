@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { Router, routes } from "src/Router";
+
+import { GlobalContextProvider } from "./GlobalContext";
 
 export const App = () => {
 	const currentPath = window.location.pathname;
 
+	const [name, setName] = useState("Unknown Name");
+
 	return (
-		<>
+		<GlobalContextProvider value={{ name, setName }}>
 			<header className="site-header">
 				<ul className="site-header-links">
 					{routes.map((route) => (
@@ -19,6 +24,6 @@ export const App = () => {
 			</header>
 
 			<Router />
-		</>
+		</GlobalContextProvider>
 	);
 };
