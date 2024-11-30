@@ -1,3 +1,4 @@
+import type { FormEvent } from "react";
 import { useCallback } from "react";
 import { useGlobalContext } from "src/GlobalContext";
 
@@ -7,11 +8,13 @@ export const AboutPage = () => {
 	const { name, setName } = useGlobalContext();
 
 	const handleFormSubmit = useCallback(
-		// biome-ignore lint/suspicious/noExplicitAny: form types, am I right?
-		(e: any) => {
-			const updatedName = e.target[nameInputId].value.trim();
+		(e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault();
-			e.target.reset();
+
+			const form = e.currentTarget;
+			const input = form.elements.namedItem(nameInputId) as HTMLInputElement;
+			const updatedName = input.value.trim();
+			form.reset();
 
 			if (updatedName) {
 				setName(updatedName);
