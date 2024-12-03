@@ -94,4 +94,25 @@ describe("GroceryCart component", () => {
 		expect(screen.getByText(emptyCartText)).toBeDefined();
 		expect(() => screen.getByText(cartHasItemsText)).toThrow();
 	});
+
+	it("selecting 'restock' adds items to the store, up to a maximum (does not affect cart)", async () => {
+		const bananasMaximum = "Bananas: 20 remaining";
+
+		render(<GroceryCart />);
+
+		// default bananas
+		expect(screen.getByText("Bananas: 8 remaining")).toBeDefined();
+
+		await user.click(screen.getByText("RESTOCK"));
+
+		// bananas have doubled
+		expect(screen.getByText("Bananas: 16 remaining")).toBeDefined();
+
+		await user.click(screen.getByText("RESTOCK"));
+		await user.click(screen.getByText("RESTOCK"));
+		await user.click(screen.getByText("RESTOCK"));
+
+		// bananas stay at their maximum
+		expect(screen.getByText(bananasMaximum)).toBeDefined();
+	});
 });
