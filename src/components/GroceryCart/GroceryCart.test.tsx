@@ -15,4 +15,7 @@ describe("GroceryCart component", () => {
 
 		expect(results).toHaveNoViolations();
 	});
+
+	// TODO: appropriately adds an item to the cart
+	// TODO: appropriately removes an item from the cart
 });

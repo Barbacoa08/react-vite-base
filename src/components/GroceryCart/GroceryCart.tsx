@@ -1,28 +1,32 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import "./GroceryCart.css";
 
+type GroceryItemType = "fruit" | "snack";
 interface GroceryItem {
 	name: string;
 	quantity: number;
+	type: GroceryItemType;
 }
-const AvailableFruits: GroceryItem[] = [
+const StartingGroceryItems: GroceryItem[] = [
 	{
 		name: "Bananas",
 		quantity: 10,
+		type: "fruit",
 	},
 	{
 		name: "Pears",
 		quantity: 30,
+		type: "fruit",
 	},
-];
-const AvailableSnacks: GroceryItem[] = [
 	{
 		name: "CheezeIts",
 		quantity: 13,
+		type: "snack",
 	},
 	{
 		name: "Gushers",
 		quantity: 1,
+		type: "snack",
 	},
 ];
 
@@ -31,16 +35,20 @@ const AvailableSnacks: GroceryItem[] = [
 
 export const GroceryCart = () => {
 	const [cart, setCart] = useState<GroceryItem[]>([]);
-	const [fruits, setFruits] = useState<GroceryItem[]>(AvailableFruits);
-	const [snacks, setSnacks] = useState<GroceryItem[]>(AvailableSnacks);
+	const [items, setItems] = useState<GroceryItem[]>(StartingGroceryItems);
 
-	// TODO: add to cart
+	const fruits = useMemo(
+		() => items.filter((i) => i.type === "fruit"),
+		[items],
+	);
+
+	const snacks = useMemo(
+		() => items.filter((i) => i.type === "snack"),
+		[items],
+	);
+
 	const handleAddToCart = useCallback(
-		(
-			name: string,
-			items: GroceryItem[],
-			setItems: React.Dispatch<React.SetStateAction<GroceryItem[]>>,
-		) => {
+		(name: string) => {
 			const selectedItemIndex = items.findIndex((i) => i.name === name);
 			if (items[selectedItemIndex].quantity <= 0) {
 				alert("you can't take a zero items");
@@ -60,6 +68,7 @@ export const GroceryCart = () => {
 					{
 						name,
 						quantity: 1,
+						type: updatedSelection[selectedItemIndex].type,
 					} satisfies GroceryItem,
 				]);
 			} else {
@@ -69,14 +78,26 @@ export const GroceryCart = () => {
 				setCart(updatedCart);
 			}
 		},
-		[cart],
+		[cart, items],
 	);
 
-	// TODO: remove item from cart
-	const handleRemoveFromCart = useCallback(() => {
-		alert("not implemented");
-		throw new Error("not implemented");
-	}, []);
+	const handleRemoveFromCart = useCallback(
+		(name: string) => {
+			const cartItemIndex = cart.findIndex((i) => i.name === name);
+			if (cart[cartItemIndex].quantity === 1) {
+				setCart(cart.filter((i) => i.name !== name));
+			} else {
+				const updatedCart = [...cart];
+				updatedCart[cartItemIndex].quantity--;
+				setCart(updatedCart);
+			}
+
+			const selectedItemIndex = items.findIndex((i) => i.name === name);
+			const updatedItems = [...items];
+			updatedItems[selectedItemIndex].quantity++;
+		},
+		[cart, items],
+	);
 
 	return (
 		<main className="grocerycart-container">
@@ -86,14 +107,12 @@ export const GroceryCart = () => {
 				<AvailableItems
 					title="Fruits"
 					items={fruits}
-					setItems={setFruits}
 					handleAddToCart={handleAddToCart}
 				/>
 
 				<AvailableItems
 					title="Snacks"
 					items={snacks}
-					setItems={setSnacks}
 					handleAddToCart={handleAddToCart}
 				/>
 			</section>
@@ -102,7 +121,7 @@ export const GroceryCart = () => {
 				<h2>Checkout area</h2>
 
 				{cart.map((c) => (
-					<div key={`checkout-${c.name}-${c.quantity}`}>
+					<div key={`checkout-${c.name}`}>
 						<span>
 							{c.name}: {c.quantity} in Cart
 						</span>
@@ -111,7 +130,7 @@ export const GroceryCart = () => {
 							className="icon-button"
 							type="button"
 							aria-label={`remove one ${c.name}`}
-							onClick={handleRemoveFromCart}
+							onClick={() => handleRemoveFromCart(c.name)}
 						>
 							❌
 						</button>
@@ -125,17 +144,12 @@ export const GroceryCart = () => {
 interface AvailableItemsProps {
 	title: string;
 	items: GroceryItem[];
-	setItems: React.Dispatch<React.SetStateAction<GroceryItem[]>>;
-	handleAddToCart: (
-		name: string,
-		items: GroceryItem[],
-		setItems: React.Dispatch<React.SetStateAction<GroceryItem[]>>,
-	) => void;
+
+	handleAddToCart: (name: string) => void;
 }
 const AvailableItems = ({
 	title,
 	items,
-	setItems,
 	handleAddToCart,
 }: AvailableItemsProps) => {
 	return (
@@ -143,7 +157,7 @@ const AvailableItems = ({
 			<h2>{title}</h2>
 
 			{items.map((i) => (
-				<div key={`${title}-${i.name}-${i.quantity}`}>
+				<div key={`${title}-${i.name}`}>
 					<span>
 						{i.name}: {i.quantity} remaining
 					</span>
@@ -153,7 +167,7 @@ const AvailableItems = ({
 						type="button"
 						aria-label={`add one ${i.name}`}
 						disabled={i.quantity <= 0}
-						onClick={() => handleAddToCart(i.name, items, setItems)}
+						onClick={() => handleAddToCart(i.name)}
 					>
 						➕
 					</button>
