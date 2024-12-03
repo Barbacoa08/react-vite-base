@@ -1,0 +1,31 @@
+.todos-container {
+	.add-todo-container {
+		display: flex;
+		flex-direction: column;
+		width: 350px;
+	}
+
+	.flex-row {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+		gap: 3rem;
+	}
+
+	.queue,
+	.completed {
+		display: flex;
+		flex-direction: column;
+
+		min-width: 300px;
+	}
+
+	.icon-button {
+		background: none;
+		border: none;
+		font: inherit;
+		cursor: pointer;
+	}
+}
