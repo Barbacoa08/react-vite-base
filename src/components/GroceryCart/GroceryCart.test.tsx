@@ -42,7 +42,31 @@ describe("GroceryCart component", () => {
 		expect(() => screen.getByText("Bananas: 1 in Cart")).toThrow();
 	});
 
-	// it("shows zero items for an item in the shop", async () => {});
+	it("shows zero items for an item in the shop, and does not show zero items in the cart", async () => {
+		const gushersCartText = "Gushers: 1 in Cart";
+		const gushersInStockText = "Gushers: 1 remaining";
+		const gushersOutOfStockText = "Gushers: 0 remaining";
 
-	// it("does not show zero items in the cart", async () => {});
+		render(<GroceryCart />);
+
+		// gushers is in stock and not in cart
+		expect(screen.getByText(gushersInStockText)).toBeDefined();
+		expect(() => screen.getByText(gushersCartText)).toThrow();
+
+		// add gushers to cart
+		const addGushersBtn = screen.getByLabelText("add one Gushers");
+		await user.click(addGushersBtn);
+
+		// gushers are out of stock and in cart
+		expect(screen.getByText(gushersOutOfStockText)).toBeDefined();
+		expect(screen.getByText(gushersCartText)).toBeDefined();
+
+		// put gushers back
+		const removeGushersBtn = screen.getByLabelText("remove one Gushers");
+		await user.click(removeGushersBtn);
+
+		// gushers are back in stock and not in cart
+		expect(screen.getByText(gushersInStockText)).toBeDefined();
+		expect(() => screen.getByText(gushersCartText)).toThrow();
+	});
 });
