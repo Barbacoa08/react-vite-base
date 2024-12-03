@@ -5,33 +5,35 @@ type GroceryItemType = "fruit" | "snack";
 interface GroceryItem {
 	name: string;
 	quantity: number;
+	maxQuantity?: number;
 	type: GroceryItemType;
 }
 const StartingGroceryItems: GroceryItem[] = [
 	{
 		name: "Bananas",
 		quantity: 10,
+		maxQuantity: 20,
 		type: "fruit",
 	},
 	{
 		name: "Pears",
 		quantity: 30,
+		maxQuantity: 50,
 		type: "fruit",
 	},
 	{
 		name: "CheezeIts",
 		quantity: 13,
+		maxQuantity: 30,
 		type: "snack",
 	},
 	{
 		name: "Gushers",
 		quantity: 1,
+		maxQuantity: 200,
 		type: "snack",
 	},
 ];
-
-// TODO: "restock" (set numbers back to base, or increment by "Available*")
-// TODO: checkout: clear cart
 
 export const GroceryCart = () => {
 	const [cart, setCart] = useState<GroceryItem[]>([]);
@@ -99,6 +101,28 @@ export const GroceryCart = () => {
 		[cart, items],
 	);
 
+	const handleCheckout = useCallback(() => setCart([]), []);
+
+	const handleRestock = useCallback(() => {
+		const updatedItems: GroceryItem[] = [];
+
+		for (const i of items) {
+			const itemToUpdate: GroceryItem = { ...i };
+
+			const startingItem = StartingGroceryItems.find(
+				(i) => i.name === itemToUpdate.name,
+			) as GroceryItem;
+			itemToUpdate.quantity = Math.min(
+				itemToUpdate.quantity + startingItem.quantity,
+				startingItem.maxQuantity as number,
+			);
+
+			updatedItems.push(itemToUpdate);
+		}
+
+		setItems(updatedItems);
+	}, [items]);
+
 	return (
 		<main className="grocerycart-container">
 			<h1>Grocery Cart</h1>
@@ -134,6 +158,26 @@ export const GroceryCart = () => {
 						</button>
 					</div>
 				))}
+
+				<div>
+					<h3>{cart.length ? "Complete checkout?" : "No items selected"}</h3>
+
+					<button
+						type="button"
+						disabled={cart.length === 0}
+						onClick={handleCheckout}
+					>
+						submit checkout
+					</button>
+				</div>
+			</section>
+
+			<section>
+				<h2>Admin tools</h2>
+
+				<button type="button" onClick={handleRestock}>
+					RESTOCK
+				</button>
 			</section>
 		</main>
 	);
