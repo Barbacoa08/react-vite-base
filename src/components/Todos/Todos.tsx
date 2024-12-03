@@ -1,3 +1,4 @@
+import type { FormEvent } from "react";
 import { useCallback, useState } from "react";
 
 import "./Todos.css";
@@ -36,11 +37,13 @@ export const Todos = () => {
 	);
 
 	const handleAddTodo = useCallback(
-		// biome-ignore lint/suspicious/noExplicitAny: why are form types so annoying?
-		(e: any) => {
-			const newTodo = e.target[TodoInputName].value.trim();
+		(e: FormEvent<HTMLFormElement>) => {
 			e.preventDefault();
-			e.target.reset();
+
+			const form = e.currentTarget;
+			const input = form.elements.namedItem(TodoInputName) as HTMLInputElement;
+			const newTodo = input.value.trim();
+			form.reset();
 
 			if (!newTodo) return;
 
