@@ -122,9 +122,7 @@ export const GroceryCart = () => {
 
 				{cart.map((c) => (
 					<div key={`checkout-${c.name}`}>
-						<span>
-							{c.name}: {c.quantity} in Cart
-						</span>
+						<span>{`${c.name}: ${c.quantity} in Cart`}</span>
 
 						<button
 							className="icon-button"
@@ -151,28 +149,24 @@ const AvailableItems = ({
 	title,
 	items,
 	handleAddToCart,
-}: AvailableItemsProps) => {
-	return (
-		<div className="grocery-type">
-			<h2>{title}</h2>
+}: AvailableItemsProps) => (
+	<div className="grocery-type">
+		<h2>{title}</h2>
 
-			{items.map((i) => (
-				<div key={`${title}-${i.name}`}>
-					<span>
-						{i.name}: {i.quantity} remaining
-					</span>
+		{items.map((i) => (
+			<div key={`${title}-${i.name}`}>
+				<span>{`${i.name}: ${i.quantity} remaining`}</span>
 
-					<button
-						className="icon-button"
-						type="button"
-						aria-label={`add one ${i.name}`}
-						disabled={i.quantity <= 0}
-						onClick={() => handleAddToCart(i.name)}
-					>
-						➕
-					</button>
-				</div>
-			))}
-		</div>
-	);
-};
+				<button
+					className="icon-button"
+					type="button"
+					aria-label={`add one ${i.name}`}
+					disabled={i.quantity <= 0}
+					onClick={() => handleAddToCart(i.name)}
+				>
+					➕
+				</button>
+			</div>
+		))}
+	</div>
+);
