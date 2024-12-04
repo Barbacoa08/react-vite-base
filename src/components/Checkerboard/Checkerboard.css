@@ -1,22 +1,22 @@
 .board {
-  --square-width-and-height: 100px;
+	--square-width-and-height: 100px;
 
-  display: grid;
-  grid-template-columns: repeat(8, var(--square-width-and-height));
+	display: grid;
+	grid-template-columns: repeat(8, var(--square-width-and-height));
 
-  .black {
-    width: var(--square-width-and-height);
-    height: var(--square-width-and-height);
-    background-color: black;
+	.black {
+		width: var(--square-width-and-height);
+		height: var(--square-width-and-height);
+		background-color: black;
 
-    color: white;
-  }
+		color: white;
+	}
 
-  .white {
-    width: var(--square-width-and-height);
-    height: var(--square-width-and-height);
-    background-color: white;
+	.white {
+		width: var(--square-width-and-height);
+		height: var(--square-width-and-height);
+		background-color: white;
 
-    color: black;
-  }
+		color: black;
+	}
 }

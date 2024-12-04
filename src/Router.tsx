@@ -3,8 +3,8 @@ import {
 	RouterProvider,
 	createBrowserRouter,
 } from "react-router-dom";
-import { AboutPage, GroceriesPage, HomePage, TodoPage } from "./pages/";
 import { Checkerboard } from "./components";
+import { AboutPage, GroceriesPage, HomePage, TodoPage } from "./pages/";
 
 export interface Route {
 	path: string;
