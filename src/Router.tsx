@@ -4,6 +4,7 @@ import {
 	createBrowserRouter,
 } from "react-router-dom";
 import { AboutPage, GroceriesPage, HomePage, TodoPage } from "./pages/";
+import { Checkerboard } from "./components";
 
 export interface Route {
 	path: string;
@@ -31,6 +32,11 @@ export const routes: Route[] = [
 		path: "/groceries",
 		element: <GroceriesPage />,
 		name: "Groceries",
+	},
+	{
+		path: "/checkerboard",
+		element: <Checkerboard />,
+		name: "Checkerboard",
 	},
 ];
 
