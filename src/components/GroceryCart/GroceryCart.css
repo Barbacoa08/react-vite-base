@@ -1,0 +1,22 @@
+.grocerycart-container {
+	--plus-border-color: yellow;
+
+	.icon-button {
+		background: none;
+		border: 1px solid var(--plus-border-color);
+		margin: 0.5rem;
+		font: inherit;
+		cursor: pointer;
+	}
+
+	.selection {
+		display: flex;
+		justify-content: space-between;
+
+		.grocery-type {
+			min-width: 300px;
+
+			--plus-border-color: green;
+		}
+	}
+}
