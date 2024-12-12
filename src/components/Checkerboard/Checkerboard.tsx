@@ -2,8 +2,15 @@ import { Fragment, useCallback, useState } from "react";
 
 import "./Checkerboard.css";
 
+const BOARD_SIZE = 8;
+
 // NOTE: `*fill( *.fill() )` has issues, see: https://stackoverflow.com/a/47057799/1022765
-const startingBoard = Array.from(Array(8), () => new Array(8).fill(0));
+const startingBoard = Array.from(new Array(BOARD_SIZE), () =>
+	new Array(BOARD_SIZE).fill(0),
+);
+
+const getCellClassName = (i: number, j: number) =>
+	(i + j) % 2 ? "black" : "white";
 
 export const Checkerboard = () => {
 	const [wholeBoard, setWholeBoard] = useState(startingBoard);
@@ -31,15 +38,15 @@ export const Checkerboard = () => {
 				{wholeBoard.map((boardRow, i) => (
 					// biome-ignore lint/suspicious/noArrayIndexKey: no better key builder, unfortunately
 					<Fragment key={`board-row-${i}`}>
-						{boardRow.map((boardCell: number, j) => (
+						{boardRow.map((clickCount: number, j) => (
 							<button
 								type="button"
-								key={`cell-{${i}-${j}-${boardCell}}`}
+								key={`cell-{${i}-${j}-${clickCount}}`}
 								aria-label="click to increase count"
-								className={`${(i + j) % 2 === 0 ? "black" : "white"}`}
+								className={getCellClassName(i, j)}
 								onClick={() => handleClick(i, j)}
 							>
-								{boardCell}
+								{clickCount}
 							</button>
 						))}
 					</Fragment>
