@@ -148,6 +148,7 @@ export const HomePage = () => {
           <NumberInput
             label={'Row Size'}
             value={rowSize}
+            min={1}
             onChange={v => {
               const newDimensions = [
                 v as number,
@@ -159,6 +160,7 @@ export const HomePage = () => {
           <NumberInput
             label={'Column Size'}
             value={columnSize}
+            min={1}
             onChange={v => {
               const newDimensions = [rowSize, v as number] satisfies Dimensions;
               handleDimensionChange(newDimensions);
