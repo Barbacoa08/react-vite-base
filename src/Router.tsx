@@ -7,8 +7,8 @@ import {
 	AboutPage,
 	GroceriesPage,
 	HomePage,
-	TodoPage,
 	InterosPage,
+	TodoPage,
 } from "./pages/";
 
 export interface Route {

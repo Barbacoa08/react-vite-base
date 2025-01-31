@@ -1,9 +1,3 @@
-export const InterosPage = () => {
-	return (
-		<main>
-			<h1>Interos</h1>
+import { InterosLanding } from "src/components/Interos";
 
-			<p>TODO: add cool things</p>
-		</main>
-	);
-};
+export const InterosPage = () => <InterosLanding />;
