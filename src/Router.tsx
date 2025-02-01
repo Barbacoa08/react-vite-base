@@ -1,3 +1,4 @@
+import type React from "react";
 import {
 	Navigate,
 	RouterProvider,
@@ -13,7 +14,7 @@ import {
 
 export interface Route {
 	path: string;
-	element: JSX.Element;
+	element: React.JSX.Element;
 	name: string;
 }
 
