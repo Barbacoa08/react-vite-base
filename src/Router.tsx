@@ -1,3 +1,4 @@
+import type React from "react";
 import {
 	Navigate,
 	RouterProvider,
@@ -7,7 +8,7 @@ import { AboutPage, GroceriesPage, HomePage, TodoPage } from "./pages/";
 
 export interface Route {
 	path: string;
-	element: JSX.Element;
+	element: React.JSX.Element;
 	name: string;
 }
 
