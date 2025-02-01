@@ -5,7 +5,7 @@ import { Line } from "react-chartjs-2";
 
 import { useState } from "react";
 
-export const Chart = () => {
+export const ExampleChart = () => {
 	const { data, setData } = useData();
 
 	return (
