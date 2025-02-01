@@ -1,5 +1,5 @@
 import { ExampleChart } from "./ExampleChart";
-import { WeatherChart } from "./WeatherChart";
+import { DoggoData } from "./DoggoData";
 
 export const InterosLanding = () => {
 	return (
@@ -27,13 +27,9 @@ export const InterosLanding = () => {
 					</li>
 				</ul>
 
-				<h3>Example Chart</h3>
-
 				<ExampleChart />
 
-				<h3>Weather Data</h3>
-
-				<WeatherChart />
+				<DoggoData />
 			</section>
 
 			<section>
