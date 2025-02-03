@@ -6,9 +6,10 @@ import {
 } from "react-router-dom";
 import {
 	AboutPage,
+	BlankPage,
+	DataCrunchPage,
 	GroceriesPage,
 	HomePage,
-	InterosPage,
 	TodoPage,
 } from "./pages/";
 
@@ -40,9 +41,14 @@ export const routes: Route[] = [
 		name: "Groceries",
 	},
 	{
-		path: "/interos",
-		element: <InterosPage />,
-		name: "Interos",
+		path: "/datacrunch",
+		element: <DataCrunchPage />,
+		name: "Data Crunch",
+	},
+	{
+		path: "/blank",
+		element: <BlankPage />,
+		name: "Blank",
 	},
 ];
 
