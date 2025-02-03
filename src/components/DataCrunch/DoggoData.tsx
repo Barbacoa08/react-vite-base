@@ -1,5 +1,7 @@
 import { use, useEffect, useId, useMemo, useState } from "react";
 
+import "./DoggoData.css";
+
 const stringSeperator = ", ";
 
 interface ApiResult {
@@ -87,16 +89,18 @@ export const DoggoData = () => {
 		<section>
 			<h2>Your Best Doggo</h2>
 
-			<DoggoSelect
-				label="Temperament"
-				options={temperaments}
-				onSelect={(v) => setFormData((prev) => ({ ...prev, temperament: v }))}
-			/>
-			<DoggoSelect
-				label="Bred For Purpose"
-				options={purposes}
-				onSelect={(v) => setFormData((prev) => ({ ...prev, purpose: v }))}
-			/>
+			<div className="doggo-quality-selection-container">
+				<DoggoSelect
+					label="Temperament"
+					options={temperaments}
+					onSelect={(v) => setFormData((prev) => ({ ...prev, temperament: v }))}
+				/>
+				<DoggoSelect
+					label="Bred For Purpose"
+					options={purposes}
+					onSelect={(v) => setFormData((prev) => ({ ...prev, purpose: v }))}
+				/>
+			</div>
 
 			<BestDoggo doggos={data} formData={formData} />
 		</section>
@@ -117,7 +121,7 @@ const DoggoSelect = ({
 	if (options.length <= 0) return <div>loading...</div>;
 
 	return (
-		<div>
+		<div className="doggo-select">
 			<label htmlFor={id}>{label}</label>
 
 			<select id={id} onChange={(e) => onSelect(e.target.value)}>

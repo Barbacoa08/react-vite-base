@@ -1,0 +1,16 @@
+.doggo-quality-selection-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.doggo-select {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  label {
+    font-size: larger;
+    font-weight: bolder;
+  }
+}
