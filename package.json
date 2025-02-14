@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"@barbajoe/css-lib": "0.2.1",
+		"@netlify/functions": "3.0.0",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
 		"react-router-dom": "7.1.5"
