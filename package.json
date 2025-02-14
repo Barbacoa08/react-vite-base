@@ -10,7 +10,8 @@
 		"lint": "biome ci ./src",
 		"format": "biome format --write ./src",
 		"style-check": "biome check --write ./src",
-		"dev": "vite --open",
+		"dev": "netlify dev",
+		"dev:client-only": "vite --open",
 		"build": "tsc -b && vite build",
 		"test": "vitest run",
 		"test:watch": "vitest",
@@ -19,6 +20,7 @@
 	},
 	"dependencies": {
 		"@barbajoe/css-lib": "0.2.1",
+		"@netlify/functions": "3.0.0",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
 		"react-router-dom": "7.1.5"
