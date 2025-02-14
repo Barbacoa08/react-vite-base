@@ -7,6 +7,8 @@ export const Welcome = () => {
 	const [count, setCount] = useState(0);
 	const { name } = useGlobalContext();
 
+	const [startingData, setStartingData] = useState([]);
+
 	const travel = useCallback(() => {
 		fetch("/travel-guide/stpaul/usa", {
 			method: "POST",
@@ -52,6 +54,35 @@ export const Welcome = () => {
 
 				<button type="button" onClick={travel}>
 					POST 'stpaul usa'
+				</button>
+			</section>
+
+			<section>
+				<h2>Hasura endpoints</h2>
+
+				<button
+					type="button"
+					onClick={() =>
+						fetch("https://shopping-cart.hasura.app/api/rest/getstartingdata", {
+							headers: {
+								"Content-Type": "application/json",
+								"x-hasura-admin-secret": import.meta.env
+									.VITE_HASURA_ADMIN_SECRET, // TODO: DO NOT put this on the client, put it on the server you fool!
+							},
+						}).then(async (r) => {
+							const result = (await r.json()).cart[0].items.replaceAll("'", '"');
+
+							console.log(result);
+							console.log(typeof result);
+							console.log(JSON.parse(result));
+							// const items = JSON.parse(result);
+							// console.log("parsed items", items);
+
+							setStartingData(result);
+						})
+					}
+				>
+					Grab starting data
 				</button>
 			</section>
 		</main>
