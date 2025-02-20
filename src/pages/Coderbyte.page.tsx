@@ -53,10 +53,32 @@ function PhoneBookForm({
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();
+
+				if (!firstName.trim() || !lastName.trim() || !phone.trim()) {
+					alert("All fields are required");
+					return;
+				}
+				if (!/^\d{10}$/.test(phone.replace(/\D/g, ""))) {
+					alert("Phone number must be 10 digits in the format: 1234567890");
+					return;
+				}
+
 				const user = { firstName, lastName, phone };
 
-				// TODO: optimizations: dedupe on f+l name
-				addEntryToPhoneBook((prev) => [...prev, user]);
+				addEntryToPhoneBook((prev) => {
+					const isDuplicate = prev.some(
+						(entry) =>
+							entry.firstName.toLowerCase() === firstName.toLowerCase() &&
+							entry.lastName.toLowerCase() === lastName.toLowerCase(),
+					);
+
+					if (isDuplicate) {
+						alert("This person is already in the phone book");
+						return prev;
+					}
+
+					return [...prev, user];
+				});
 			}}
 			style={style.form.container}
 		>
@@ -64,6 +86,7 @@ function PhoneBookForm({
 			<br />
 			<input
 				id="userFirstname"
+				required
 				style={style.form.inputs}
 				className="userFirstname"
 				name="userFirstname"
@@ -77,6 +100,7 @@ function PhoneBookForm({
 			<br />
 			<input
 				id="userLastName"
+				required
 				style={style.form.inputs}
 				className="userLastname"
 				name="userLastname"
@@ -90,13 +114,18 @@ function PhoneBookForm({
 			<br />
 			<input
 				id="userPhone"
+				required
 				style={style.form.inputs}
 				className="userPhone"
 				name="userPhone"
-				type="text"
+				type="tel"
+				minLength={10}
+				maxLength={10}
+				pattern="[0-9]{10}"
 				value={phone}
 				onChange={(e) => setPhone(e.target.value)}
 			/>
+			<div>Phone input must be ten numbers, eg: 1234567890</div>
 
 			<br />
 			<input
@@ -111,7 +140,7 @@ function PhoneBookForm({
 
 function InformationTable({ entries }: { entries: User[] }) {
 	const sortedEntries = useMemo(
-		() => entries.sort((a, b) => a.lastName.localeCompare(b.lastName)),
+		() => entries.toSorted((a, b) => a.lastName.localeCompare(b.lastName)),
 		[entries],
 	);
 
@@ -126,11 +155,11 @@ function InformationTable({ entries }: { entries: User[] }) {
 			</thead>
 
 			<tbody>
-				{sortedEntries.map((e) => (
-					<tr key={e.firstName + e.lastName}>
-						<td>First Name: {e.firstName}</td>
-						<td>Last Name: {e.lastName}</td>
-						<td>Phone: {e.phone}</td>
+				{sortedEntries.map((e, i) => (
+					<tr key={`${e.firstName}-${e.lastName}-${i}`}>
+						<td>{e.firstName}</td>
+						<td>{e.lastName}</td>
+						<td>{e.phone}</td>
 					</tr>
 				))}
 			</tbody>
