@@ -7,7 +7,7 @@ import {
 import {
 	AboutPage,
 	BlankPage,
-  CheckerboardPage,
+	CheckerboardPage,
 	DataCrunchPage,
 	GroceriesPage,
 	HomePage,
@@ -42,11 +42,6 @@ export const routes: Route[] = [
 		name: "Groceries",
 	},
 	{
-		path: "/checkerboard",
-		element: <CheckerboardPage />,
-		name: "Checkerboard",
-	},
-	{
 		path: "/datacrunch",
 		element: <DataCrunchPage />,
 		name: "Data Crunch",
@@ -55,6 +50,11 @@ export const routes: Route[] = [
 		path: "/blank",
 		element: <BlankPage />,
 		name: "Blank",
+	},
+	{
+		path: "/checkerboard",
+		element: <CheckerboardPage />,
+		name: "Checkerboard",
 	},
 ];
 
