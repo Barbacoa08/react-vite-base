@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import "./Welcome.css";
 import { useGlobalContext } from "src/GlobalContext";
@@ -6,14 +6,6 @@ import { useGlobalContext } from "src/GlobalContext";
 export const Welcome = () => {
 	const [count, setCount] = useState(0);
 	const { name } = useGlobalContext();
-
-	const [startingData, setStartingData] = useState([]);
-
-	const travel = useCallback(() => {
-		fetch("/travel-guide/stpaul/usa", {
-			method: "POST",
-		}).then((v) => console.log(v));
-	}, []);
 
 	return (
 		<main>
@@ -39,50 +31,17 @@ export const Welcome = () => {
 			</section>
 
 			<section>
-				<h2>NEW! Now with AWS Lambda (via Netlify Serverless) functions!</h2>
+				<h2>Now with AWS Lambda (via Netlify Serverless) functions!</h2>
 
 				<p>Get the super basic "hello" result by clicking here:</p>
-
-				<button type="button" onClick={() => fetch("/api/hello")}>
-					GET 'hello'
-				</button>
-
-				<p>
-					And get the slightly cooler result of your city and country result by
-					clicking here:
-				</p>
-
-				<button type="button" onClick={travel}>
-					POST 'stpaul usa'
-				</button>
-			</section>
-
-			<section>
-				<h2>Hasura endpoints</h2>
 
 				<button
 					type="button"
 					onClick={() =>
-						fetch("https://shopping-cart.hasura.app/api/rest/getstartingdata", {
-							headers: {
-								"Content-Type": "application/json",
-								"x-hasura-admin-secret": import.meta.env
-									.VITE_HASURA_ADMIN_SECRET, // TODO: DO NOT put this on the client, put it on the server you fool!
-							},
-						}).then(async (r) => {
-							const result = (await r.json()).cart[0].items.replaceAll("'", '"');
-
-							console.log(result);
-							console.log(typeof result);
-							console.log(JSON.parse(result));
-							// const items = JSON.parse(result);
-							// console.log("parsed items", items);
-
-							setStartingData(result);
-						})
+						fetch("/api/hello").then((r) => r.text().then((t) => alert(t)))
 					}
 				>
-					Grab starting data
+					GET 'hello'
 				</button>
 			</section>
 		</main>
