@@ -4,8 +4,15 @@ import {
 	RouterProvider,
 	createBrowserRouter,
 } from "react-router-dom";
-import { Checkerboard } from "./components";
-import { AboutPage, GroceriesPage, HomePage, TodoPage } from "./pages/";
+import {
+	AboutPage,
+	BlankPage,
+  CheckerboardPage,
+	DataCrunchPage,
+	GroceriesPage,
+	HomePage,
+	TodoPage,
+} from "./pages/";
 
 export interface Route {
 	path: string;
@@ -36,8 +43,18 @@ export const routes: Route[] = [
 	},
 	{
 		path: "/checkerboard",
-		element: <Checkerboard />,
+		element: <CheckerboardPage />,
 		name: "Checkerboard",
+	},
+	{
+		path: "/datacrunch",
+		element: <DataCrunchPage />,
+		name: "Data Crunch",
+	},
+	{
+		path: "/blank",
+		element: <BlankPage />,
+		name: "Blank",
 	},
 ];
 
