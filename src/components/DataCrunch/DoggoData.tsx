@@ -164,7 +164,7 @@ const BestDoggo = ({
 						<p>Purpose: {purpose || "not yet selected"}</p>
 					</>
 				) : (
-					<p>No selectios made</p>
+					<p>No selections made</p>
 				)}
 			</section>
 
