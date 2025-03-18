@@ -7,6 +7,7 @@ import {
 import {
 	AboutPage,
 	BlankPage,
+	CheckerboardPage,
 	DataCrunchPage,
 	GroceriesPage,
 	HomePage,
@@ -49,6 +50,11 @@ export const routes: Route[] = [
 		path: "/blank",
 		element: <BlankPage />,
 		name: "Blank",
+	},
+	{
+		path: "/checkerboard",
+		element: <CheckerboardPage />,
+		name: "Checkerboard",
 	},
 ];
 
