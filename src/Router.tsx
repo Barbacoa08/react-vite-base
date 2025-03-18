@@ -4,7 +4,14 @@ import {
 	RouterProvider,
 	createBrowserRouter,
 } from "react-router-dom";
-import { AboutPage, GroceriesPage, HomePage, TodoPage } from "./pages/";
+import {
+	AboutPage,
+	BlankPage,
+	DataCrunchPage,
+	GroceriesPage,
+	HomePage,
+	TodoPage,
+} from "./pages/";
 
 export interface Route {
 	path: string;
@@ -32,6 +39,16 @@ export const routes: Route[] = [
 		path: "/groceries",
 		element: <GroceriesPage />,
 		name: "Groceries",
+	},
+	{
+		path: "/datacrunch",
+		element: <DataCrunchPage />,
+		name: "Data Crunch",
+	},
+	{
+		path: "/blank",
+		element: <BlankPage />,
+		name: "Blank",
 	},
 ];
 
