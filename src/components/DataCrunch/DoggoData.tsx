@@ -142,15 +142,18 @@ const BestDoggo = ({
 	formData: { purpose, temperament },
 }: { doggos: ApiResult[]; formData: DoggoForm }) => {
 	const matches = useMemo(() => {
-		return purpose && temperament
-			? doggos
-					.filter(
-						(d) =>
-							d.bred_for?.includes(purpose) &&
-							d.temperament.split(stringSeperator).includes(temperament),
-					)
-					.map((d) => d.name)
-			: [];
+		return doggos
+			.filter((d) => {
+				const matchesPurpose =
+					!purpose || (d.bred_for?.includes(purpose) ?? false);
+				const matchesTemperament =
+					!temperament ||
+					(d.temperament?.split(stringSeperator).includes(temperament) ??
+						false);
+
+				return matchesPurpose && matchesTemperament;
+			})
+			.map((d) => d.name);
 	}, [doggos, purpose, temperament]);
 
 	return (
