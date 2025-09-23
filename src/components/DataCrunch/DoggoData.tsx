@@ -111,13 +111,15 @@ const DoggoSelect = ({
 	label,
 	options = [],
 	onSelect,
-	id = useId(),
+	propId,
 }: {
 	label: string;
 	options: string[];
 	onSelect: (v: string) => void;
-	id?: string;
+	propId?: string;
 }) => {
+	const generatedId = useId();
+	const id = useMemo(() => propId || generatedId, [propId, generatedId]);
 	if (options.length <= 0) return <div>loading...</div>;
 
 	return (
@@ -140,7 +142,10 @@ const DoggoSelect = ({
 const BestDoggo = ({
 	doggos,
 	formData: { purpose, temperament },
-}: { doggos: ApiResult[]; formData: DoggoForm }) => {
+}: {
+	doggos: ApiResult[];
+	formData: DoggoForm;
+}) => {
 	const matches = useMemo(() => {
 		return doggos
 			.filter((d) => {

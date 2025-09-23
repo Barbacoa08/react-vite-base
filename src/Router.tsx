@@ -1,8 +1,8 @@
 import type React from "react";
 import {
+	createBrowserRouter,
 	Navigate,
 	RouterProvider,
-	createBrowserRouter,
 } from "react-router-dom";
 import {
 	AboutPage,
