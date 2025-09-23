@@ -1,9 +1,8 @@
 import "chart.js/auto";
 
 import type { ChartData } from "chart.js/auto";
-import { Line } from "react-chartjs-2";
-
 import { useState } from "react";
+import { Line } from "react-chartjs-2";
 
 export const ExampleChart = () => {
 	const { data, setData } = useData();
