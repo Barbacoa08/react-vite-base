@@ -1,3 +1,4 @@
+export * from "./Battleship";
 export * from "./Checkerboard";
 export * from "./DataCrunch";
 export * from "./GroceryCart";

@@ -1,0 +1,48 @@
+.battleship-container {
+	--square-width-and-height: 40px;
+	--custom-cursor-url: pointer;
+
+	.hide {
+		display: none;
+	}
+
+	.board {
+		display: grid;
+		grid-template-columns: repeat(10, var(--square-width-and-height));
+
+		&.horizontal {
+			/* from: emojicursor.app */
+			--custom-cursor-url:
+				url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>➡️</text></svg>")
+				16 0, auto;
+		}
+
+		&.vertical {
+			/* from: emojicursor.app */
+			--custom-cursor-url:
+				url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>⬇️</text></svg>")
+				16 0, auto;
+		}
+
+		.cell {
+			width: var(--square-width-and-height);
+			height: var(--square-width-and-height);
+			background-color: cornsilk;
+			border: 1px solid black;
+
+			font-size: 16px;
+			color: darkblue;
+
+			&:hover:not(:disabled) {
+				background-color: lightblue;
+
+				cursor: var(--custom-cursor-url);
+			}
+
+			&:disabled {
+				background-color: lightgray;
+				cursor: not-allowed;
+			}
+		}
+	}
+}

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import {
 	AboutPage,
+	BattleshipPage,
 	BlankPage,
 	CheckerboardPage,
 	DataCrunchPage,
@@ -55,6 +56,11 @@ export const routes: Route[] = [
 		path: "/checkerboard",
 		element: <CheckerboardPage />,
 		name: "Checkerboard",
+	},
+	{
+		path: "/battleship",
+		element: <BattleshipPage />,
+		name: "Battleship",
 	},
 ];
 
