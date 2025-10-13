@@ -1,7 +1,8 @@
 import "@testing-library/jest-dom/vitest";
-import { vi } from "vitest";
 
 import { toHaveNoViolations } from "jest-axe";
+import { vi } from "vitest";
+
 expect.extend(toHaveNoViolations);
 
 const { getComputedStyle } = window;
