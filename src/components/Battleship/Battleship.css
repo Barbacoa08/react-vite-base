@@ -1,12 +1,12 @@
 .battleship-container {
-	--square-width-and-height: 40px;
-	--custom-cursor-url: pointer;
-
 	.hide {
 		display: none;
 	}
 
 	.board {
+		--square-width-and-height: 40px;
+		--custom-cursor-url: pointer;
+
 		display: grid;
 		grid-template-columns: repeat(10, var(--square-width-and-height));
 
