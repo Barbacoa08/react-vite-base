@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { useGlobalContext } from "src/GlobalContext";
+import { useBattleshipContext } from "./BattleshipContext";
 
 export const Player1BoardHeader = () => {
-	const { state } = useGlobalContext().gameState;
+	const { state } = useBattleshipContext().gameState;
 
 	const addtionalText = useMemo(() => {
 		let result = "";
@@ -20,7 +20,7 @@ export const Player1BoardHeader = () => {
 };
 
 export const Player2BoardHeader = () => {
-	const { state } = useGlobalContext().gameState;
+	const { state } = useBattleshipContext().gameState;
 
 	const addtionalText = useMemo(() => {
 		let result = "";

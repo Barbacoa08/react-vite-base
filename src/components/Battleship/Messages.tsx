@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { useGlobalContext } from "src/GlobalContext";
+import { useBattleshipContext } from "./BattleshipContext";
 
 export const TransitionMessage = () => {
-	const { state, next } = useGlobalContext().gameState;
+	const { state, next } = useBattleshipContext().gameState;
 
 	const hide = useMemo(() => !state.includes("transition"), [state]);
 
@@ -37,7 +37,7 @@ export const TransitionMessage = () => {
 };
 
 export const GameOverMessage = () => {
-	const { state } = useGlobalContext().gameState;
+	const { state } = useBattleshipContext().gameState;
 
 	const hide = useMemo(() => state !== "game-over", [state]);
 
@@ -56,7 +56,7 @@ export const Player1ContentMessage = () => {
 		placementOrientation,
 		player1ShipToPlace,
 		handleAutoPlace,
-	} = useGlobalContext();
+	} = useBattleshipContext();
 
 	return (
 		<section>
@@ -94,7 +94,7 @@ export const Player2ContentMessage = () => {
 		placementOrientation,
 		player2ShipToPlace,
 		handleAutoPlace,
-	} = useGlobalContext();
+	} = useBattleshipContext();
 
 	return (
 		<section>
