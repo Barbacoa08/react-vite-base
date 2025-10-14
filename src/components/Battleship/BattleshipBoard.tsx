@@ -59,7 +59,8 @@ const BoardRow = ({
 	<Fragment>
 		{row.map((cellState, colIndex) => (
 			<BoardCell
-				key={`cell-${rowIndex}-${colIndex}-${cellState}`}
+				// biome-ignore lint/suspicious/noArrayIndexKey: no better key
+				key={`cell-${rowIndex}-${colIndex}`}
 				x={rowIndex}
 				y={colIndex}
 				cellState={cellState}
