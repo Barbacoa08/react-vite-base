@@ -1,4 +1,5 @@
 export * from "./About.page";
+export * from "./Battleship.page";
 export * from "./Blank.page";
 export * from "./Checkerboard.page";
 export * from "./DataCrunch.page";
