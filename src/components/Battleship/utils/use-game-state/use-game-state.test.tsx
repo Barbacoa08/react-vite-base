@@ -1,4 +1,5 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react";
+import { vi } from "vitest";
 import { MaximumTurns, useGameState } from ".";
 
 describe("useGameState", () => {
@@ -84,6 +85,8 @@ describe("useGameState", () => {
 	});
 
 	it(`should force end if turns exceed ${MaximumTurns}`, () => {
+		const alertMockSpy = vi.spyOn(window, "alert").mockImplementation(() => {});
+
 		const { result } = renderHook(() => useGameState());
 		expect(result.current.turn).toBe(0);
 
@@ -96,5 +99,9 @@ describe("useGameState", () => {
 		expect(result.current.turn).toBe(MaximumTurns + 1); // locks at MaximumTurns + 1
 		expect(result.current.state).toBe("game-over");
 		expect(result.current.isTerminal).toBe(true);
+
+		expect(alertMockSpy).toHaveBeenCalledTimes(1);
+
+		alertMockSpy.mockRestore();
 	});
 });

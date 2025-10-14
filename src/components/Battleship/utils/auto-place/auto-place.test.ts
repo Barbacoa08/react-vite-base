@@ -41,12 +41,6 @@ describe("autoPlace", () => {
 
 		const shipCells = newBoard.flat().filter((cell) => cell.hasShip);
 
-		console.log(
-			newBoard
-				.map((row) => row.map((cell) => (cell.hasShip ? "S" : ".")).join(" "))
-				.join("\n"),
-		);
-
 		expect(shipCells.length).toBe(pieces.reduce((a, b) => a + b, 0));
 	});
 
