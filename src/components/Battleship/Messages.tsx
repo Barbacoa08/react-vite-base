@@ -54,7 +54,7 @@ export const Player1ContentMessage = () => {
 	const {
 		gameState: { state },
 		placementOrientation,
-		player1ShipToPlace,
+		player1ShipsToPlace,
 		handleAutoPlace,
 	} = useBattleshipContext();
 
@@ -62,10 +62,10 @@ export const Player1ContentMessage = () => {
 		<section>
 			{state === "placing-player1" ? (
 				<>
-					<p>Remaining Ships to place: {player1ShipToPlace.length}</p>
+					<p>Remaining Ships to place: {player1ShipsToPlace.length}</p>
 
 					<p>
-						You are about to place a ship of length `{player1ShipToPlace[0]}`{" "}
+						You are about to place a ship of length `{player1ShipsToPlace[0]}`{" "}
 						{placementOrientation}.
 					</p>
 
@@ -92,7 +92,7 @@ export const Player2ContentMessage = () => {
 	const {
 		gameState: { state },
 		placementOrientation,
-		player2ShipToPlace,
+		player2ShipsToPlace,
 		handleAutoPlace,
 	} = useBattleshipContext();
 
@@ -100,10 +100,10 @@ export const Player2ContentMessage = () => {
 		<section>
 			{state === "placing-player2" ? (
 				<>
-					<p>Remaining Ships to place: {player2ShipToPlace.length}</p>
+					<p>Remaining Ships to place: {player2ShipsToPlace.length}</p>
 
 					<p>
-						You are about to place a ship of length `{player2ShipToPlace[0]}`{" "}
+						You are about to place a ship of length `{player2ShipsToPlace[0]}`{" "}
 						{placementOrientation}.
 					</p>
 

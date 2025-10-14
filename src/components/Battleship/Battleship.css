@@ -33,7 +33,9 @@
 			font-size: 16px;
 			color: darkblue;
 
-			&:hover:not(:disabled) {
+			&:hover:not(:disabled),
+			&:focus:not(:disabled),
+			&.ship-placement-mode {
 				background-color: lightblue;
 
 				cursor: var(--custom-cursor-url);

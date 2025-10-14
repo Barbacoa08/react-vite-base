@@ -10,13 +10,19 @@ export interface BattleshipContextType {
 	player1Board: Board;
 	setPlayer1Board: (board: Board) => void;
 
+	player1Hover: string[];
+	setPlayer1Hover: (hoveredCells: string[]) => void;
+
+	player2Hover: string[];
+	setPlayer2Hover: (hoveredCells: string[]) => void;
+
 	player2Board: Board;
 	setPlayer2Board: (board: Board) => void;
 
-	player1ShipToPlace: number[];
+	player1ShipsToPlace: number[];
 	setPlayer1ShipsToPlace: (ships: number[]) => void;
 
-	player2ShipToPlace: number[];
+	player2ShipsToPlace: number[];
 	setPlayer2ShipsToPlace: (ships: number[]) => void;
 
 	handleAutoPlace: (isPlayer1: boolean) => void;
@@ -39,13 +45,17 @@ const BattleshipContext = createContext<BattleshipContextType>({
 	setPlayer1Board: () => {},
 	player2Board: [[]],
 	setPlayer2Board: () => {},
-	player1ShipToPlace: [],
+	player1ShipsToPlace: [],
 	setPlayer1ShipsToPlace: () => {},
-	player2ShipToPlace: [],
+	player2ShipsToPlace: [],
 	setPlayer2ShipsToPlace: () => {},
 	handleAutoPlace: () => {},
 	handleClickPlayer1Board: () => {},
 	handleClickPlayer2Board: () => {},
+	player1Hover: [],
+	setPlayer1Hover: () => {},
+	player2Hover: [],
+	setPlayer2Hover: () => {},
 });
 
 export const BattleshipContextProvider: React.FC<

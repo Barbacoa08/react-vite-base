@@ -26,10 +26,13 @@ export const BattleshipPage = () => {
 
 	const [player1Board, setPlayer1Board] = useState<Board>(startingBoard);
 	const [player2Board, setPlayer2Board] = useState<Board>(startingBoard);
-	const [player1ShipToPlace, setPlayer1ShipsToPlace] =
+	const [player1ShipsToPlace, setPlayer1ShipsToPlace] =
 		useState<ShipPieces>(DefaultSetOfShips);
-	const [player2ShipToPlace, setPlayer2ShipsToPlace] =
+	const [player2ShipsToPlace, setPlayer2ShipsToPlace] =
 		useState<ShipPieces>(DefaultSetOfShips);
+
+	const [player1Hover, setPlayer1Hover] = useState<string[]>([]);
+	const [player2Hover, setPlayer2Hover] = useState<string[]>([]);
 
 	// handle reset
 	useEffect(() => {
@@ -68,7 +71,7 @@ export const BattleshipPage = () => {
 			if (state === "placing-player1") {
 				const updatedBoard = placeShip(
 					player1Board,
-					player1ShipToPlace[0],
+					player1ShipsToPlace[0],
 					i,
 					j,
 					placementOrientation === "horizontal",
@@ -78,7 +81,7 @@ export const BattleshipPage = () => {
 				} else {
 					setPlayer1Board(updatedBoard);
 
-					const remainingShips = player1ShipToPlace.slice(1);
+					const remainingShips = player1ShipsToPlace.slice(1);
 					setPlayer1ShipsToPlace(remainingShips);
 
 					if (remainingShips.length === 0) {
@@ -112,7 +115,7 @@ export const BattleshipPage = () => {
 				setPlayer1Board(updatedBoard);
 			}
 		},
-		[player1Board, player1ShipToPlace, placementOrientation, next, state],
+		[player1Board, player1ShipsToPlace, placementOrientation, next, state],
 	);
 
 	const handleClickPlayer2Board = useCallback(
@@ -120,7 +123,7 @@ export const BattleshipPage = () => {
 			if (state === "placing-player2") {
 				const updatedBoard = placeShip(
 					player2Board,
-					player2ShipToPlace[0],
+					player2ShipsToPlace[0],
 					i,
 					j,
 					placementOrientation === "horizontal",
@@ -130,7 +133,7 @@ export const BattleshipPage = () => {
 				} else {
 					setPlayer2Board(updatedBoard);
 
-					const remainingShips = player2ShipToPlace.slice(1);
+					const remainingShips = player2ShipsToPlace.slice(1);
 					setPlayer2ShipsToPlace(remainingShips);
 
 					if (remainingShips.length === 0) {
@@ -164,17 +167,17 @@ export const BattleshipPage = () => {
 				setPlayer2Board(updatedBoard);
 			}
 		},
-		[player2Board, next, placementOrientation, player2ShipToPlace, state],
+		[player2Board, next, placementOrientation, player2ShipsToPlace, state],
 	);
 
 	const handleAutoPlace = useCallback(
 		(isPlayer1: boolean) => {
 			try {
 				if (isPlayer1) {
-					setPlayer1Board(autoPlace(player1Board, player1ShipToPlace));
+					setPlayer1Board(autoPlace(player1Board, player1ShipsToPlace));
 					setPlayer1ShipsToPlace([]);
 				} else {
-					setPlayer2Board(autoPlace(player2Board, player2ShipToPlace));
+					setPlayer2Board(autoPlace(player2Board, player2ShipsToPlace));
 					setPlayer2ShipsToPlace([]);
 				}
 
@@ -185,7 +188,13 @@ export const BattleshipPage = () => {
 				}
 			}
 		},
-		[player1Board, player2Board, player1ShipToPlace, player2ShipToPlace, next],
+		[
+			player1Board,
+			player2Board,
+			player1ShipsToPlace,
+			player2ShipsToPlace,
+			next,
+		],
 	);
 
 	return (
@@ -198,13 +207,17 @@ export const BattleshipPage = () => {
 				setPlayer1Board,
 				player2Board,
 				setPlayer2Board,
-				player1ShipToPlace,
+				player1ShipsToPlace: player1ShipsToPlace,
 				setPlayer1ShipsToPlace,
-				player2ShipToPlace,
+				player2ShipsToPlace: player2ShipsToPlace,
 				setPlayer2ShipsToPlace,
 				handleAutoPlace,
 				handleClickPlayer1Board,
 				handleClickPlayer2Board,
+				player1Hover,
+				setPlayer1Hover,
+				player2Hover,
+				setPlayer2Hover,
 			}}
 		>
 			<Battleship />

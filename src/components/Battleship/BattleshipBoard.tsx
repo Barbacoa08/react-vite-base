@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from "react";
+import { Fragment, useCallback, useMemo } from "react";
 import { useBattleshipContext } from "./BattleshipContext";
 import type { Board, CellState, State } from "./types";
 
@@ -86,17 +86,128 @@ const BoardCell = ({
 	cellState: CellState;
 	onClick: (x: number, y: number) => void;
 	isMyBoard: boolean;
-}) => (
-	<button
-		type="button"
-		aria-label="click to place strike"
-		className="cell"
-		disabled={isCellDisabled(gameState, cellState, isMyBoard)}
-		onClick={() => onClick(x, y)}
-	>
-		{buildViewState(cellState, isMyBoard)}
-	</button>
-);
+}) => {
+	const {
+		placementOrientation,
+		player1Hover,
+		setPlayer1Hover,
+		player2Hover,
+		setPlayer2Hover,
+		player1ShipsToPlace,
+		player2ShipsToPlace,
+	} = useBattleshipContext();
+
+	const setPlacingCells = useCallback(
+		(xPos: number, yPos: number) => {
+			if (
+				player1ShipsToPlace.length > 0 &&
+				gameState === "placing-player1" &&
+				placementOrientation === "horizontal"
+			) {
+				// TODO: out of bounds
+				// if (yPos + nextShipLength > 10) {
+				// 	setPlayer1Hover([]);
+				// 	return;
+				// }
+				const nextShipLength = player1ShipsToPlace[0];
+				const newHover = [];
+				for (let i = 0; i < nextShipLength; i++) {
+					newHover.push(`[${xPos}, ${yPos + i}]`);
+				}
+				setPlayer1Hover(newHover);
+			} else if (
+				player1ShipsToPlace.length > 0 &&
+				gameState === "placing-player1" &&
+				placementOrientation === "vertical"
+			) {
+				const nextShipLength = player1ShipsToPlace[0];
+				const newHover = [];
+				for (let i = 0; i < nextShipLength; i++) {
+					newHover.push(`[${xPos + i}, ${yPos}]`);
+				}
+				setPlayer1Hover(newHover);
+			} else if (
+				player2ShipsToPlace.length > 0 &&
+				gameState === "placing-player2" &&
+				placementOrientation === "horizontal"
+			) {
+				const nextShipLength = player2ShipsToPlace[0];
+				const newHover = [];
+				for (let i = 0; i < nextShipLength; i++) {
+					newHover.push(`[${xPos}, ${yPos + i}]`);
+				}
+				setPlayer2Hover(newHover);
+			} else if (
+				player2ShipsToPlace.length > 0 &&
+				gameState === "placing-player2" &&
+				placementOrientation === "vertical"
+			) {
+				const nextShipLength = player2ShipsToPlace[0];
+				const newHover = [];
+				for (let i = 0; i < nextShipLength; i++) {
+					newHover.push(`[${xPos + i}, ${yPos}]`);
+				}
+				setPlayer2Hover(newHover);
+			}
+		},
+		[
+			gameState,
+			setPlayer1Hover,
+			setPlayer2Hover,
+			placementOrientation,
+			player1ShipsToPlace,
+			player2ShipsToPlace,
+		],
+	);
+
+	const unsetPlacingCells = useCallback(() => {
+		if (gameState === "placing-player1") {
+			setPlayer1Hover([]);
+		} else if (gameState === "placing-player2") {
+			setPlayer2Hover([]);
+		}
+	}, [gameState, setPlayer1Hover, setPlayer2Hover]);
+
+	const isFocused = useMemo(() => {
+		if (player1Hover.length > 1) {
+			const isInHoverArray = player1Hover.includes(`[${x}, ${y}]`);
+			return isInHoverArray;
+		} else if (player2Hover.length > 1) {
+			const isInHoverArray = player2Hover.includes(`[${x}, ${y}]`);
+			return isInHoverArray;
+		}
+
+		return false;
+	}, [player1Hover, player2Hover, x, y]);
+
+	return (
+		<button
+			type="button"
+			aria-label="click to place strike"
+			className={`cell ${isFocused ? "ship-placement-mode" : ""}`}
+			onMouseEnter={() => {
+				console.log(`mouse enter on: [${x}, ${y}]`);
+				setPlacingCells(x, y);
+			}}
+			onMouseLeave={() => {
+				console.log(`mouse leave on: [${x}, ${y}]`);
+				unsetPlacingCells();
+			}}
+			onFocus={() => {
+				console.log(`focus on: [${x}, ${y}]`);
+				setPlacingCells(x, y);
+			}}
+			onBlur={() => {
+				console.log(`blur on: [${x}, ${y}]`);
+				unsetPlacingCells();
+			}}
+			disabled={isCellDisabled(gameState, cellState, isMyBoard)}
+			onClick={() => onClick(x, y)}
+		>
+			{buildViewState(cellState, isMyBoard)}
+		</button>
+	);
+};
 
 const isCellDisabled = (
 	state: State,
