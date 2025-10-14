@@ -26,21 +26,25 @@ describe("useGameState", () => {
 
 	it("should reset the game correctly", () => {
 		const { result } = renderHook(() => useGameState());
+
+		// move forward a few turns, then end
+		act(() => {
+			result.current.next();
+			result.current.next();
+			result.current.next();
+			result.current.next();
+			result.current.next();
+			result.current.next();
+			result.current.end();
+		});
+		expect(result.current.state).toBe("game-over");
+
+		// test that reset() brings us back to initial state
 		act(() => {
 			result.current.reset();
 		});
 		expect(result.current.state).toBe("placing-player1");
-
-		act(() => {
-			// move random point in game
-			result.current.next();
-			result.current.next();
-			result.current.next();
-			result.current.next();
-
-			result.current.end();
-		});
-		expect(result.current.state).toBe("game-over");
+		expect(result.current.turn).toBe(0);
 	});
 
 	it("should correctly identify terminal state", () => {
