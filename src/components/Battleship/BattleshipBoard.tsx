@@ -153,9 +153,15 @@ const BoardCell = ({
 	);
 
 	const unsetPlacingCells = useCallback(() => {
-		if (gameState === "placing-player1") {
+		if (
+			[
+				"placing-player1",
+				"placing-player2",
+				"transition-to-placing-player2",
+				"transition-to-playing-player1",
+			].includes(gameState)
+		) {
 			setPlayer1Hover([]);
-		} else if (gameState === "placing-player2") {
 			setPlayer2Hover([]);
 		}
 	}, [gameState, setPlayer1Hover, setPlayer2Hover]);
@@ -175,22 +181,10 @@ const BoardCell = ({
 			type="button"
 			aria-label="click to place strike"
 			className={`cell ${isFocused ? "ship-placement-mode" : ""}`}
-			onMouseEnter={() => {
-				console.log(`mouse enter on: [${x}, ${y}]`);
-				setPlacingCells(x, y);
-			}}
-			onMouseLeave={() => {
-				console.log(`mouse leave on: [${x}, ${y}]`);
-				unsetPlacingCells();
-			}}
-			onFocus={() => {
-				console.log(`focus on: [${x}, ${y}]`);
-				setPlacingCells(x, y);
-			}}
-			onBlur={() => {
-				console.log(`blur on: [${x}, ${y}]`);
-				unsetPlacingCells();
-			}}
+			onMouseEnter={() => setPlacingCells(x, y)}
+			onMouseLeave={unsetPlacingCells}
+			onFocus={() => setPlacingCells(x, y)}
+			onBlur={unsetPlacingCells}
 			disabled={isCellDisabled(gameState, cellState, isMyBoard)}
 			onClick={() => onClick(x, y)}
 		>
