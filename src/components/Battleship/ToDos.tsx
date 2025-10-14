@@ -3,7 +3,6 @@ export const ToDos = () => (
 		<h2>Todos</h2>
 
 		<ol>
-			<li>placement arrows</li>
 			<li>player 2 name</li>
 			<li>save game to localstorage</li>
 			<li>online play</li>
