@@ -88,7 +88,7 @@ export const BattleshipPage = () => {
 			} else if (state === "playing-player2") {
 				const updatedBoard = structuredClone(player1Board);
 				const cell = updatedBoard[i][j];
-				if (cell.opponnentView === "hit" || cell.opponnentView === "miss") {
+				if (cell.opponentView === "hit" || cell.opponentView === "miss") {
 					alert("Already shot here");
 					return;
 				}
@@ -96,14 +96,14 @@ export const BattleshipPage = () => {
 				if (cell.hasShip) {
 					updatedBoard[i][j] = {
 						...cell,
-						opponnentView: "hit",
+						opponentView: "hit",
 						myView: "hit",
 					};
 					alert("Hit! Great shot! 🎯");
 				} else {
 					updatedBoard[i][j] = {
 						...cell,
-						opponnentView: "miss",
+						opponentView: "miss",
 						myView: "miss",
 					};
 					alert("Miss! So close! ❌");
@@ -140,7 +140,7 @@ export const BattleshipPage = () => {
 			} else if (state === "playing-player1") {
 				const updatedBoard = structuredClone(player2Board);
 				const cell = updatedBoard[i][j];
-				if (cell.opponnentView === "hit" || cell.opponnentView === "miss") {
+				if (cell.opponentView === "hit" || cell.opponentView === "miss") {
 					alert("Already shot here");
 					return;
 				}
@@ -148,14 +148,14 @@ export const BattleshipPage = () => {
 				if (cell.hasShip) {
 					updatedBoard[i][j] = {
 						...cell,
-						opponnentView: "hit",
+						opponentView: "hit",
 						myView: "hit",
 					};
 					alert("Hit! Great shot! 🎯");
 				} else {
 					updatedBoard[i][j] = {
 						...cell,
-						opponnentView: "miss",
+						opponentView: "miss",
 						myView: "miss",
 					};
 					alert("Miss! So close! ❌");

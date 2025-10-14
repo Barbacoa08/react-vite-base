@@ -120,7 +120,7 @@ const isCellDisabled = (
 };
 
 const buildViewState = (cellState: CellState, isMyBoard: boolean) => {
-	const view = isMyBoard ? cellState.myView : cellState.opponnentView;
+	const view = isMyBoard ? cellState.myView : cellState.opponentView;
 	switch (view) {
 		case "hit":
 			return "💥";

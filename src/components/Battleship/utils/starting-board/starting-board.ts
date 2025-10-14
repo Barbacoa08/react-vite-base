@@ -3,7 +3,7 @@ import type { Board, CellState } from "../../types";
 const BOARD_SIZE = 10;
 export const EmptyCell: CellState = {
 	myView: "empty" as const,
-	opponnentView: "empty" as const,
+	opponentView: "empty" as const,
 	hasShip: false,
 } as const;
 

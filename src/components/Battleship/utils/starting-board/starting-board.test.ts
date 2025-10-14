@@ -7,7 +7,7 @@ describe("startingBoard", () => {
 			expect(row.length).toBe(10);
 			row.forEach((cell) => {
 				expect(cell.myView).toBe("empty");
-				expect(cell.opponnentView).toBe("empty");
+				expect(cell.opponentView).toBe("empty");
 				expect(cell.hasShip).toBe(false);
 			});
 		});

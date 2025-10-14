@@ -1,7 +1,7 @@
 export type CellVisibleState = "hit" | "miss" | "empty" | "ship";
 export interface CellState {
 	myView: CellVisibleState;
-	opponnentView: CellVisibleState;
+	opponentView: CellVisibleState;
 	hasShip: boolean;
 }
 
