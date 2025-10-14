@@ -72,8 +72,8 @@ export const Player1ContentMessage = () => {
 					<p>Press 'r' to rotate your ship</p>
 
 					<p>
-						If you would like to have the remaining automatically placed for
-						you, you can{" "}
+						If you would like to have the remaining ships automatically placed
+						for you, you can{" "}
 						<button type="button" onClick={() => handleAutoPlace(true)}>
 							click here
 						</button>
@@ -110,8 +110,8 @@ export const Player2ContentMessage = () => {
 					<p>Press 'r' to rotate your ship</p>
 
 					<p>
-						If you would like to have the remaining automatically placed for
-						you, you can{" "}
+						If you would like to have the remaining ships automatically placed
+						for you, you can{" "}
 						<button type="button" onClick={() => handleAutoPlace(false)}>
 							click here
 						</button>
