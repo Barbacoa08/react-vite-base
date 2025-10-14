@@ -4,7 +4,7 @@ import { useBattleshipContext } from "./BattleshipContext";
 export const Player1BoardHeader = () => {
 	const { state } = useBattleshipContext().gameState;
 
-	const addtionalText = useMemo(() => {
+	const additionalText = useMemo(() => {
 		let result = "";
 
 		if (state === "placing-player1") {
@@ -16,13 +16,13 @@ export const Player1BoardHeader = () => {
 		return result;
 	}, [state]);
 
-	return <h2>Player 1's Board {addtionalText}</h2>;
+	return <h2>Player 1's Board {additionalText}</h2>;
 };
 
 export const Player2BoardHeader = () => {
 	const { state } = useBattleshipContext().gameState;
 
-	const addtionalText = useMemo(() => {
+	const additionalText = useMemo(() => {
 		let result = "";
 
 		if (state === "placing-player2") {
@@ -34,5 +34,5 @@ export const Player2BoardHeader = () => {
 		return result;
 	}, [state]);
 
-	return <h2>Player 2's Board {addtionalText}</h2>;
+	return <h2>Player 2's Board {additionalText}</h2>;
 };
