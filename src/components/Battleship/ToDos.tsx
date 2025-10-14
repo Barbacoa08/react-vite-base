@@ -7,6 +7,7 @@ export const ToDos = () => (
 			<li>player 2 name</li>
 			<li>save game to localstorage</li>
 			<li>online play</li>
+			<li>hover: out of bounds</li>
 			<li>OPTIONAL: Add animations</li>
 			<li>OPTIONAL: Add option to change board size</li>
 			<li>OPTIONAL: Add AI opponent</li>

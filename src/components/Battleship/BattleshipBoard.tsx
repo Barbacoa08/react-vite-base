@@ -104,11 +104,6 @@ const BoardCell = ({
 				gameState === "placing-player1" &&
 				placementOrientation === "horizontal"
 			) {
-				// TODO: out of bounds
-				// if (yPos + nextShipLength > 10) {
-				// 	setPlayer1Hover([]);
-				// 	return;
-				// }
 				const nextShipLength = player1ShipsToPlace[0];
 				const newHover = [];
 				for (let i = 0; i < nextShipLength; i++) {
@@ -170,11 +165,9 @@ const BoardCell = ({
 
 	const isFocused = useMemo(() => {
 		if (player1Hover.length > 1) {
-			const isInHoverArray = player1Hover.includes(`[${x}, ${y}]`);
-			return isInHoverArray;
+			return player1Hover.includes(`[${x}, ${y}]`);
 		} else if (player2Hover.length > 1) {
-			const isInHoverArray = player2Hover.includes(`[${x}, ${y}]`);
-			return isInHoverArray;
+			return player2Hover.includes(`[${x}, ${y}]`);
 		}
 
 		return false;
