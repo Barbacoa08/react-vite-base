@@ -97,52 +97,48 @@ const BoardCell = ({
 		player2ShipsToPlace,
 	} = useBattleshipContext();
 
+	const setPlayerHover = useCallback(
+		(
+			xPos: number,
+			yPos: number,
+			shipLength: number,
+			orientation: "horizontal" | "vertical",
+			setHover: (hover: string[]) => void,
+		) => {
+			const newHover = [];
+			for (let i = 0; i < shipLength; i++) {
+				newHover.push(
+					orientation === "vertical"
+						? `[${xPos + i}, ${yPos}]`
+						: `[${xPos}, ${yPos + i}]`,
+				);
+			}
+			setHover(newHover);
+		},
+		[],
+	);
+
 	const setPlacingCells = useCallback(
 		(xPos: number, yPos: number) => {
-			if (
-				player1ShipsToPlace.length > 0 &&
-				gameState === "placing-player1" &&
-				placementOrientation === "horizontal"
-			) {
-				const nextShipLength = player1ShipsToPlace[0];
-				const newHover = [];
-				for (let i = 0; i < nextShipLength; i++) {
-					newHover.push(`[${xPos}, ${yPos + i}]`);
-				}
-				setPlayer1Hover(newHover);
-			} else if (
-				player1ShipsToPlace.length > 0 &&
-				gameState === "placing-player1" &&
-				placementOrientation === "vertical"
-			) {
-				const nextShipLength = player1ShipsToPlace[0];
-				const newHover = [];
-				for (let i = 0; i < nextShipLength; i++) {
-					newHover.push(`[${xPos + i}, ${yPos}]`);
-				}
-				setPlayer1Hover(newHover);
+			if (player1ShipsToPlace.length > 0 && gameState === "placing-player1") {
+				setPlayerHover(
+					xPos,
+					yPos,
+					player1ShipsToPlace[0],
+					placementOrientation,
+					setPlayer1Hover,
+				);
 			} else if (
 				player2ShipsToPlace.length > 0 &&
-				gameState === "placing-player2" &&
-				placementOrientation === "horizontal"
+				gameState === "placing-player2"
 			) {
-				const nextShipLength = player2ShipsToPlace[0];
-				const newHover = [];
-				for (let i = 0; i < nextShipLength; i++) {
-					newHover.push(`[${xPos}, ${yPos + i}]`);
-				}
-				setPlayer2Hover(newHover);
-			} else if (
-				player2ShipsToPlace.length > 0 &&
-				gameState === "placing-player2" &&
-				placementOrientation === "vertical"
-			) {
-				const nextShipLength = player2ShipsToPlace[0];
-				const newHover = [];
-				for (let i = 0; i < nextShipLength; i++) {
-					newHover.push(`[${xPos + i}, ${yPos}]`);
-				}
-				setPlayer2Hover(newHover);
+				setPlayerHover(
+					xPos,
+					yPos,
+					player2ShipsToPlace[0],
+					placementOrientation,
+					setPlayer2Hover,
+				);
 			}
 		},
 		[
@@ -152,6 +148,7 @@ const BoardCell = ({
 			placementOrientation,
 			player1ShipsToPlace,
 			player2ShipsToPlace,
+			setPlayerHover,
 		],
 	);
 
