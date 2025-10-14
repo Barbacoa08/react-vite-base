@@ -164,14 +164,7 @@ export const BattleshipPage = () => {
 				setPlayer2Board(updatedBoard);
 			}
 		},
-		[
-			player2Board,
-			next,
-			placementOrientation,
-			player2ShipToPlace.slice,
-			player2ShipToPlace[0],
-			state,
-		],
+		[player2Board, next, placementOrientation, player2ShipToPlace, state],
 	);
 
 	const handleAutoPlace = useCallback(
