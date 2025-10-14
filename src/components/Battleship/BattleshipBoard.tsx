@@ -167,9 +167,9 @@ const BoardCell = ({
 	}, [gameState, setPlayer1Hover, setPlayer2Hover]);
 
 	const isFocused = useMemo(() => {
-		if (player1Hover.length > 1) {
+		if (player1Hover.length > 0) {
 			return player1Hover.includes(`[${x}, ${y}]`);
-		} else if (player2Hover.length > 1) {
+		} else if (player2Hover.length > 0) {
 			return player2Hover.includes(`[${x}, ${y}]`);
 		}
 
