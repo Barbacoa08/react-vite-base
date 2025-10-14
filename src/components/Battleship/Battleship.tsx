@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useGlobalContext } from "src/GlobalContext";
 import { BattleshipBoard } from "./BattleshipBoard";
 import { useBattleshipContext } from "./BattleshipContext";
 import {
@@ -12,6 +13,7 @@ import { Player1BoardHeader, Player2BoardHeader } from "./PlayerHeaders";
 import "./Battleship.css";
 
 export const Battleship = () => {
+	const { name } = useGlobalContext();
 	const {
 		gameState,
 		player1Board,
@@ -22,12 +24,12 @@ export const Battleship = () => {
 	const { state, turn, reset } = gameState;
 
 	const playersTurn = useMemo(() => {
-		if (state.includes("player1")) return "Player 1";
+		if (state.includes("player1")) return name || "Player 1";
 		if (state.includes("player2")) return "Player 2";
 
 		// game over
 		return "again";
-	}, [state]);
+	}, [state, name]);
 
 	return (
 		<main className="battleship-container">
